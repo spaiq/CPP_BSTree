@@ -23,6 +23,10 @@ public:
             right = nullptr;
         }
     };
+
+private:
+    Node* root;
+    unsigned length;
 };
 
 int main()
