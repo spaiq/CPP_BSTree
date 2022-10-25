@@ -37,6 +37,54 @@ public:
     ~BST() {
         //clear();
     }
+
+    //a)
+    template <typename Comp>
+    void append(const T& data, Comp comp) {
+        if (!root) {
+            root = new Node(data);
+            return;
+        }
+        if (data == root->data) {
+            root->data = data;
+            return;
+        }
+        Node* newVal;
+        auto p = root;
+        while (p->left || p->right) {
+            if (comp(p->data, data)) {
+                if (p->left) {
+                    p = p->left;
+                }
+                else {
+                    newVal = new Node(data, p);
+                    p->left = newVal;
+                    return;
+                }
+            }
+            else {
+                if (p->right) {
+                    p = p->right;
+                }
+                else {
+                    newVal = new Node(data, p);
+                    p->right = newVal;
+                    return;
+                }
+            }
+        }
+        if (comp(p->data, data)) {
+            newVal = new Node(data, p);
+            p->left = newVal;
+            return;
+        }
+        else {
+            newVal = new Node(data, p);
+            p->right = newVal;
+            return;
+        }
+        std::cout << "Ooops... I shouldnt be executed.\n";
+    }
 };
 
 int main()
