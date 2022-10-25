@@ -33,6 +33,10 @@ public:
     BST() noexcept
         : root(nullptr), length(0) {
     }
+
+    ~BST() {
+        //clear();
+    }
 };
 
 int main()
