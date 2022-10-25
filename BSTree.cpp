@@ -88,7 +88,7 @@ public:
 
     //b)
     template <typename Comp>
-    Node* findElement(const T& el, Comp compEq, Comp comp) {
+    Node* findElement(const T& el, Comp compEq, Comp comp) const{
         auto p = root;
         while (compEq(data, p->data)==false) {
             if (comp(data, p->data) {
