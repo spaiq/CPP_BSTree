@@ -104,6 +104,13 @@ public:
     }
 };
 
+struct some_class {
+    int some_int;
+    bool operator== (const some_class& obj) const {
+        return some_int == obj.some_int;
+    };
+};
+
 int main()
 {
     auto kompLess = [](const some_class& a, const some_class& b) {
