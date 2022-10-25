@@ -52,7 +52,7 @@ public:
         Node* newVal;
         auto p = root;
         while (p->left || p->right) {
-            if (comp(p->data, data)) {
+            if (comp(data, p->data)) {
                 if (p->left) {
                     p = p->left;
                 }
@@ -73,7 +73,7 @@ public:
                 }
             }
         }
-        if (comp(p->data, data)) {
+        if (comp(data, p->data)) {
             newVal = new Node(data, p);
             p->left = newVal;
             return;
