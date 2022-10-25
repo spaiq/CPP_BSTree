@@ -88,15 +88,15 @@ public:
 
     //b)
     template <typename Comp>
-    Node* findElement(const T& el, Comp compEq, Comp comp) const{
+    Node* findElement(const T& el, Comp compEq, Comp comp) const {
         auto p = root;
-        while (compEq(data, p->data)==false) {
+        while (compEq(data, p->data) == false) {
             if (comp(data, p->data) {
-                if(!p->left) return nullptr;
+                if (!p->left) return nullptr;
                     p = p->left;
             }
             else {
-                if(!p->right) return nullptr;
+                if (!p->right) return nullptr;
                     p = p->right;
             }
         }
