@@ -8,6 +8,7 @@ public:
         Node* parent;
         Node* left;
         Node* right;
+        // unsigned index;
 
         Node(const T& data, Node* parent = nullptr, Node* left = nullptr, Node* right = nullptr)
             : data(data), parent(parent), left(left),  right(right) {
@@ -27,7 +28,6 @@ public:
 private:
     Node* root;
     unsigned length;
-    unsigned index;
 
 public:
     BST() noexcept
