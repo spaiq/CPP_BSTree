@@ -30,6 +30,9 @@ private:
     unsigned index;
 
 public:
+    BST() noexcept
+        : root(nullptr), length(0) {
+    }
 };
 
 int main()
