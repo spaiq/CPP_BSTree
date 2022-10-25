@@ -1,5 +1,9 @@
 ﻿#include <iostream>
 
+template<typename T>
+class BST {
+};
+
 int main()
 {
 
