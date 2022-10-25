@@ -27,6 +27,9 @@ public:
 private:
     Node* root;
     unsigned length;
+    unsigned index;
+
+public:
 };
 
 int main()
