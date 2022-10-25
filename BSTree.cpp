@@ -85,6 +85,23 @@ public:
         }
         std::cout << "Ooops... I shouldnt be executed.\n";
     }
+
+    //b)
+    template <typename Comp>
+    Node* findElement(const T& el, Comp compEq, Comp comp) {
+        auto p = root;
+        while (compEq(data, p->data)==false) {
+            if (comp(data, p->data) {
+                if(!p->left) return nullptr;
+                p = p->left;
+            }
+            else {
+                if(!p->right) return nullptr;
+                p = p->right;
+            }
+        }
+        return p;
+    }
 };
 
 int main()
