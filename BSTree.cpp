@@ -90,14 +90,14 @@ public:
     template <typename Comp>
     Node* findElement(const T& el, Comp compEq, Comp comp) const {
         auto p = root;
-        while (compEq(data, p->data) == false) {
-            if (comp(data, p->data) {
+        while (!compEq(el, p->data)) {
+            if (comp(el, p->data)) {
                 if (!p->left) return nullptr;
-                    p = p->left;
+                p = p->left;
             }
             else {
                 if (!p->right) return nullptr;
-                    p = p->right;
+                p = p->right;
             }
         }
         return p;
