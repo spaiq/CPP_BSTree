@@ -11,7 +11,7 @@ public:
         // unsigned index;
 
         Node(const T& data, Node* parent = nullptr, Node* left = nullptr, Node* right = nullptr)
-            : data(data), parent(parent), left(left),  right(right) {
+            : data(data), parent(parent), left(left), right(right) {
         }
 
         Node(T&& data, Node* parent = nullptr, Node* left = nullptr, Node* right = nullptr)
@@ -93,11 +93,11 @@ public:
         while (compEq(data, p->data)==false) {
             if (comp(data, p->data) {
                 if(!p->left) return nullptr;
-                p = p->left;
+                    p = p->left;
             }
             else {
                 if(!p->right) return nullptr;
-                p = p->right;
+                    p = p->right;
             }
         }
         return p;
@@ -106,6 +106,9 @@ public:
 
 int main()
 {
+    auto kompLess = [](const some_class& a, const some_class& b) {
+        return a.some_int < b.some_int;
+    };
 
     return 0;
 }
