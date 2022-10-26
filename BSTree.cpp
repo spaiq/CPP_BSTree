@@ -39,6 +39,10 @@ public:
         //clear();
     }
 
+    Node* getRoot() {
+        return root;
+    }
+
     //a)
     template <typename Comp>
     void append(const T& data, Comp compLess) {
