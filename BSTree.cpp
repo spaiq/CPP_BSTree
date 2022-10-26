@@ -227,8 +227,8 @@ int main()
     tree->append(some_class{ 13 }, compLess);
     tree->append(some_class{ 41 }, compLess);
 
-    std::cout << tree->preOrder(tree->getRoot());
-    std::cout << tree->inOrder(tree->getRoot());
+    std::cout << tree->preOrder(tree->getRoot()) << "\n";
+    std::cout << tree->inOrder(tree->getRoot()) << "\n";
 
     return 0;
 }
