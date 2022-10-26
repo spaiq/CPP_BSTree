@@ -29,13 +29,13 @@ public:
     };
 
 private:
-    Node* root;
-    unsigned length;
-    unsigned new_index;
+    Node* ROOT;
+    unsigned LENGTH;
+    unsigned NEW_INDEX;
 
 public:
     binary_search_tree() noexcept
-        : root(nullptr), length(0), new_index(0) {
+        : ROOT(nullptr), LENGTH(0), NEW_INDEX(0) {
     }
 
     ~binary_search_tree() {
@@ -43,24 +43,24 @@ public:
     }
 
     Node* get_root() {
-        return root;
+        return ROOT;
     }
 
     //a)
     template <typename Comp>
     void append(const T& data, Comp comp_less) {
-        if (!root) {
-            root = new Node(data, nullptr, new_index);
-            new_index++;
-            length++;
+        if (!ROOT) {
+            ROOT = new Node(data, nullptr, NEW_INDEX);
+            NEW_INDEX++;
+            LENGTH++;
             return;
         }
-        if (data == root->data) {
-            root->data = data;
+        if (data == ROOT->data) {
+            ROOT->data = data;
             return;
         }
         Node* new_value;
-        auto temp = root;
+        auto temp = ROOT;
         while (temp->left || temp->right) {
             if(temp->left)
                 if (data == temp->left->data) {
@@ -77,10 +77,10 @@ public:
                     temp = temp->left;
                 }
                 else {
-                    new_value = new Node(data, temp, new_index);
+                    new_value = new Node(data, temp, NEW_INDEX);
                     temp->left = new_value;
-                    new_index++;
-                    length++;
+                    NEW_INDEX++;
+                    LENGTH++;
                     return;
                 }
             }
@@ -89,26 +89,26 @@ public:
                     temp = temp->right;
                 }
                 else {
-                    new_value = new Node(data, temp, new_index);
+                    new_value = new Node(data, temp, NEW_INDEX);
                     temp->right = new_value;
-                    new_index++;
-                    length++;
+                    NEW_INDEX++;
+                    LENGTH++;
                     return;
                 }
             }
         }
         if (comp_less(data, temp->data)) {
-            new_value = new Node(data, temp, new_index);
+            new_value = new Node(data, temp, NEW_INDEX);
             temp->left = new_value;
-            new_index++;
-            length++;
+            NEW_INDEX++;
+            LENGTH++;
             return;
         }
         else {
-            new_value = new Node(data, temp, new_index);
+            new_value = new Node(data, temp, NEW_INDEX);
             temp->right = new_value;
-            new_index++;
-            length++;
+            NEW_INDEX++;
+            LENGTH++;
             return;
         }
         std::cout << "Ooops... I shouldnt be executed.\n";
@@ -117,7 +117,7 @@ public:
     //b)
     template <typename Comp>
     Node* find_element(const T& el, Comp comp_less) const {
-        auto temp = root;
+        auto temp = ROOT;
         while (!(el == temp->data)) {
             if (comp_less(el, temp->data)) {
                 if (!temp->left) return nullptr;
@@ -155,7 +155,7 @@ public:
         }
         delete temp;
         temp = nullptr;
-        length--;
+        LENGTH--;
         return;
     }
 
@@ -187,23 +187,23 @@ public:
 
         delete_tree(node->left);
         delete_tree(node->right);
-        if (node == root) {
-            length = 0;
-            delete root;
-            root = nullptr;
+        if (node == ROOT) {
+            LENGTH = 0;
+            delete ROOT;
+            ROOT = nullptr;
             return;
         }
         delete node;
         node = nullptr;
         return;*/
-        auto temp = root;
+        auto temp = ROOT;
         Node* del;
         while (true) {
             while (temp->left)
                 temp = temp->left;
             if (temp->right)
                 temp = temp->right;
-            else if (temp == root) break;
+            else if (temp == ROOT) break;
             else{
                 del = temp;
                 temp = temp->parent;
@@ -213,8 +213,8 @@ public:
                 del = nullptr;
             }
         }
-        delete root;
-        root = nullptr;
+        delete ROOT;
+        ROOT = nullptr;
         return;
     }
 
@@ -247,13 +247,13 @@ public:
     }*/
 
     std::string to_string() {
-        if (root == NULL)
+        if (ROOT == NULL)
             return "Tree is empty";
         std::stack<Node*> nodeStack;
-        nodeStack.push(root);
+        nodeStack.push(ROOT);
         std::ostringstream stream;
-        stream << "size: " << length
-            << "\nheight: " << tree_height(root)
+        stream << "size: " << LENGTH
+            << "\nheight: " << tree_height(ROOT)
             << "\n\nindex\tparent\tleft\tright\tdata\n";
 
         while (nodeStack.empty() == false) {
