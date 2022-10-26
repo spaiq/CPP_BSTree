@@ -2,7 +2,7 @@
 #include <sstream>
 
 template<typename T>
-class BST {
+class binary_search_tree {
 public:
     struct Node {
         T data;
@@ -15,7 +15,7 @@ public:
             : data(data), parent(parent), index(index), left(left), right(right) {
         }
 
-        Node(T&& data, Node* parent = nullptr, unsigned index = 0 Node* left = nullptr, Node* right = nullptr)
+        Node(T&& data, Node* parent = nullptr, unsigned index = 0, Node* left = nullptr, Node* right = nullptr)
             : data(data), parent(parent), index(index), left(left), right(right) {
         }
 
@@ -33,21 +33,21 @@ private:
     unsigned new_index;
 
 public:
-    BST() noexcept
+    binary_search_tree() noexcept
         : root(nullptr), length(0), new_index(0) {
     }
 
-    ~BST() {
-        deleteTree();
+    ~binary_search_tree() {
+        delete_tree();
     }
 
-    Node* getRoot() {
+    Node* get_root() {
         return root;
     }
 
     //a)
     template <typename Comp>
-    void append(const T& data, Comp compLess) {
+    void append(const T& data, Comp comp_less) {
         if (!root) {
             root = new Node(data, nullptr, new_index);
             new_index++;
@@ -58,54 +58,54 @@ public:
             root->data = data;
             return;
         }
-        Node* newVal;
-        auto p = root;
-        while (p->left || p->right) {
-            if(p->left)
-                if (data == p->left->data) {
-                    p->left->data = data;
+        Node* new_value;
+        auto temp = root;
+        while (temp->left || temp->right) {
+            if(temp->left)
+                if (data == temp->left->data) {
+                    temp->left->data = data;
                     return;
                 }
-            if(p->right)
-                if (data == p->right->data) {
-                    p->right->data = data;
+            if(temp->right)
+                if (data == temp->right->data) {
+                    temp->right->data = data;
                     return;
                 }
-            if (compLess(data, p->data)) {
-                if (p->left) {
-                    p = p->left;
+            if (comp_less(data, temp->data)) {
+                if (temp->left) {
+                    temp = temp->left;
                 }
                 else {
-                    newVal = new Node(data, p, new_index);
-                    p->left = newVal;
+                    new_value = new Node(data, temp, new_index);
+                    temp->left = new_value;
                     new_index++;
                     length++;
                     return;
                 }
             }
             else {
-                if (p->right) {
-                    p = p->right;
+                if (temp->right) {
+                    temp = temp->right;
                 }
                 else {
-                    newVal = new Node(data, p, new_index);
-                    p->right = newVal;
+                    new_value = new Node(data, temp, new_index);
+                    temp->right = new_value;
                     new_index++;
                     length++;
                     return;
                 }
             }
         }
-        if (compLess(data, p->data)) {
-            newVal = new Node(data, p, new_index);
-            p->left = newVal;
+        if (comp_less(data, temp->data)) {
+            new_value = new Node(data, temp, new_index);
+            temp->left = new_value;
             new_index++;
             length++;
             return;
         }
         else {
-            newVal = new Node(data, p, new_index);
-            p->right = newVal;
+            new_value = new Node(data, temp, new_index);
+            temp->right = new_value;
             new_index++;
             length++;
             return;
@@ -115,95 +115,95 @@ public:
 
     //b)
     template <typename Comp>
-    Node* findElement(const T& el, Comp compEq, Comp comp) const {
-        auto p = root;
-        while (!compEq(el, p->data)) {
-            if (comp(el, p->data)) {
-                if (!p->left) return nullptr;
-                p = p->left;
+    Node* find_element(const T& el, Comp comp_less) const {
+        auto temp = root;
+        while (el != temp->data) {
+            if (comp_less(el, temp->data)) {
+                if (!temp->left) return nullptr;
+                temp = temp->left;
             }
             else {
-                if (!p->right) return nullptr;
-                p = p->right;
+                if (!temp->right) return nullptr;
+                temp = temp->right;
             }
         }
-        return p;
+        return temp;
     }
 
     //c)
     template <typename Comp>
-    void findAndRemove(Node* el) {
-        auto p = el;
-        if (p == nullptr) throw std::domain_error("Proba wywolania nieistniejacego elementu.");
-        if (p->right) {
+    void find_and_remove(Node* el) {
+        auto temp = el;
+        if (temp == nullptr) throw std::domain_error("Proba wywolania nieistniejacego elementu.");
+        if (temp->right) {
             while (true) {
-                while (p->right) {
-                    p->data = p->right->data;
-                    p = p->right;
+                while (temp->right) {
+                    temp->data = temp->right->data;
+                    temp = temp->right;
                 }
-                if (p->left) {
-                    p->data = p->left->data;
-                    p = p->left;
+                if (temp->left) {
+                    temp->data = temp->left->data;
+                    temp = temp->left;
                 }
                 else {
-                    delete p;
+                    delete temp;
                     break;
                 }
             }
         }
-        else if (p->left) {
-            p->data = p->left->data;
-            p = p->left;
+        else if (temp->left) {
+            temp->data = temp->left->data;
+            temp = temp->left;
             while (true) {
-                while (p->right) {
-                    p->data = p->right->data;
-                    p = p->right;
+                while (temp->right) {
+                    temp->data = temp->right->data;
+                    temp = temp->right;
                 }
-                if (p->left) {
-                    p->data = p->left->data;
-                    p = p->left;
+                if (temp->left) {
+                    temp->data = temp->left->data;
+                    temp = temp->left;
                 }
                 else {
-                    delete p;
+                    delete temp;
                     break;
                 }
             }
         }
         else {
-            delete p;
+            delete temp;
         }
         length--;
         return;
     }
 
     //d)
-    std::string preOrder(Node* node) const {
-        std::ostringstream str;
-        if (node == nullptr) return str.str();
-        str << node->data << " ";
-        str << preOrder(node->left);
-        str << preOrder(node->right);
+    std::string pre_order(Node* node) const {
+        std::ostringstream stream;
+        if (node == nullptr) return stream.str();
+        stream << node->data << " ";
+        stream << pre_order(node->left);
+        stream << pre_order(node->right);
 
-        return str.str();
+        return stream.str();
     }
 
     //e)
-    std::string inOrder(Node* node) const {
-        std::ostringstream str;
-        if (node == nullptr) return str.str();
-        str << inOrder(node->left);
-        str << node->data << " ";
-        str << inOrder(node->right);
+    std::string in_order(Node* node) const {
+        std::ostringstream stream;
+        if (node == nullptr) return stream.str();
+        stream << in_order(node->left);
+        stream << node->data << " ";
+        stream << in_order(node->right);
 
-        return str.str();
+        return stream.str();
     }
     
     //f)
-    void deleteTree(Node* node) {
+    void delete_tree(Node* node) {
         if (node == nullptr) return;
 
-        deleteTree(node->left);
-        deleteTree(node->right);
+        delete_tree(node->left);
+        delete_tree(node->right);
         if (node == root) {
             length = 0;
             delete root;
@@ -216,28 +216,28 @@ public:
     }
 
     //g)
-    unsigned treeHeight(Node* node) const {
+    unsigned tree_height(Node* node) const {
         if (node == nullptr) return 0;
         else {
-            int leftHeight = treeHeight(node->left);
-            int rightHeight = treeHeight(node->right);
+            int left_height = tree_height(node->left);
+            int right_height = tree_height(node->right);
 
-            return std::max(leftHeight, rightHeight) + 1;
+            return std::max(left_height, right_height) + 1;
         }
     }
 
     //h)
-    std::string printGraph(const std::string& prefix, const Node* node, bool isLeft)
+    std::string print_graph(const std::string& prefix, const Node* node, bool isLeft)
     {
-        std::ostringstream str;
+        std::ostringstream stream;
         if (node != nullptr)
         {
-            str << prefix << "|--" << node->data << "\n";
-            str << printGraph(prefix + (isLeft ? "|   " : "    "), node->left, true);
-            str << printGraph(prefix + (isLeft ? "|   " : "    "), node->right, false);
-            return str.str();
+            stream << prefix << "|--" << node->data << "\n";
+            stream << print_graph(prefix + (isLeft ? "|   " : "    "), node->left, true);
+            stream << print_graph(prefix + (isLeft ? "|   " : "    "), node->right, false);
+            return stream.str();
         }
-        return str.str();
+        return stream.str();
     }
 };
 
@@ -255,33 +255,29 @@ std::ostream& operator<< (std::ostream& out, const some_class& obj) {
 
 int main()
 {
-    auto compLess = [](const some_class& a, const some_class& b) {
+    auto comp_less = [](const some_class& a, const some_class& b) {
         return a.some_int < b.some_int;
     };
 
-    auto compEq = [](const some_class& a, const some_class& b) {
-        return a.some_int == b.some_int;
-    };
+    binary_search_tree<some_class>* tree = new binary_search_tree<some_class>;
+    tree->append(some_class{ 10 }, comp_less);
+    tree->append(some_class{ 2 }, comp_less);
+    tree->append(some_class{ 32 }, comp_less);
+    tree->append(some_class{ 41 }, comp_less);
+    tree->append(some_class{ 13 }, comp_less);
+    tree->append(some_class{ 7 }, comp_less);
+    tree->append(some_class{ 5 }, comp_less);
+    tree->append(some_class{ 2 }, comp_less);
+    tree->append(some_class{ 32 }, comp_less);
+    tree->append(some_class{ 13 }, comp_less);
+    tree->append(some_class{ 41 }, comp_less);
 
-    BST<some_class>* tree = new BST<some_class>;
-    tree->append(some_class{ 10 }, compLess);
-    tree->append(some_class{ 2 }, compLess);
-    tree->append(some_class{ 32 }, compLess);
-    tree->append(some_class{ 41 }, compLess);
-    tree->append(some_class{ 13 }, compLess);
-    tree->append(some_class{ 7 }, compLess);
-    tree->append(some_class{ 5 }, compLess);
-    tree->append(some_class{ 2 }, compLess);
-    tree->append(some_class{ 32 }, compLess);
-    tree->append(some_class{ 13 }, compLess);
-    tree->append(some_class{ 41 }, compLess);
-
-    std::cout << tree->preOrder(tree->getRoot()) << "\n";
-    std::cout << tree->inOrder(tree->getRoot()) << "\n";
-    std::cout << tree->treeHeight(tree->getRoot()) << "\n";
-    std::cout << "\n" << tree->printGraph("", tree->getRoot(), false) << "\n";
-    tree->deleteTree(tree->getRoot());
-    std::cout << tree->inOrder(tree->getRoot()) << "\n";
+    std::cout << tree->pre_order(tree->get_root()) << "\n";
+    std::cout << tree->in_order(tree->get_root()) << "\n";
+    std::cout << tree->tree_height(tree->get_root()) << "\n";
+    std::cout << "\n" << tree->print_graph("", tree->get_root(), false) << "\n";
+    tree->delete_tree(tree->get_root());
+    std::cout << tree->in_order(tree->get_root()) << "\n";
 
     return 0;
 }
