@@ -215,5 +215,7 @@ int main()
     test->append(some_class{ 13 }, compLess);
     test->append(some_class{ 41 }, compLess);
 
+    std::cout << test->preOrder(test->getRoot());
+
     return 0;
 }
