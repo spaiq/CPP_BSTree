@@ -41,9 +41,10 @@ public:
 
     //a)
     template <typename Comp>
-    void append(const T& data, Comp comp) {
+    void append(const T& data, Comp compLess) {
         if (!root) {
             root = new Node(data);
+            length++;
             return;
         }
         if (data == root->data) {
@@ -53,13 +54,24 @@ public:
         Node* newVal;
         auto p = root;
         while (p->left || p->right) {
-            if (comp(data, p->data)) {
+            if(p->left)
+                if (data == p->left->data) {
+                    p->left->data = data;
+                    return;
+                }
+            if(p->right)
+                if (data == p->right->data) {
+                    p->right->data = data;
+                    return;
+                }
+            if (compLess(data, p->data)) {
                 if (p->left) {
                     p = p->left;
                 }
                 else {
                     newVal = new Node(data, p);
                     p->left = newVal;
+                    length++;
                     return;
                 }
             }
@@ -70,18 +82,21 @@ public:
                 else {
                     newVal = new Node(data, p);
                     p->right = newVal;
+                    length++;
                     return;
                 }
             }
         }
-        if (comp(data, p->data)) {
+        if (compLess(data, p->data)) {
             newVal = new Node(data, p);
             p->left = newVal;
+            length++;
             return;
         }
         else {
             newVal = new Node(data, p);
             p->right = newVal;
+            length++;
             return;
         }
         std::cout << "Ooops... I shouldnt be executed.\n";
