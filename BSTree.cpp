@@ -190,6 +190,23 @@ public:
 
         return str.str();
     }
+    
+    //f)
+    void deleteTree(Node* node) {
+        if (node == nullptr) return;
+
+        deleteTree(node->left);
+        deleteTree(node->right);
+        if (node == root) {
+            length = 0;
+            delete root;
+            root = nullptr;
+            return;
+        }
+        delete node;
+        node = nullptr;
+        return;
+    }
 };
 
 struct some_class {
