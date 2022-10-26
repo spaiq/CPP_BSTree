@@ -281,8 +281,8 @@ int main()
     tree->find_and_remove(tree->get_root());
     std::cout << "\n" << tree->print_graph("", tree->get_root(), false) << "\n";
 
-    /*tree->delete_tree(tree->get_root());
-    std::cout << tree->in_order(tree->get_root()) << "\n";*/
+    tree->delete_tree(tree->get_root());
+    std::cout << tree->in_order(tree->get_root()) << "\n";
 
     return 0;
 }
