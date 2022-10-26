@@ -9,30 +9,32 @@ public:
         Node* parent;
         Node* left;
         Node* right;
-        // unsigned index;
+        unsigned index;
 
-        Node(const T& data, Node* parent = nullptr, Node* left = nullptr, Node* right = nullptr)
-            : data(data), parent(parent), left(left), right(right) {
+        Node(const T& data, Node* parent = nullptr, unsigned index = 0, Node* left = nullptr, Node* right = nullptr)
+            : data(data), parent(parent), index(index), left(left), right(right) {
         }
 
-        Node(T&& data, Node* parent = nullptr, Node* left = nullptr, Node* right = nullptr)
-            : data(data), parent(parent), left(left), right(right) {
+        Node(T&& data, Node* parent = nullptr, unsigned index = 0 Node* left = nullptr, Node* right = nullptr)
+            : data(data), parent(parent), index(index), left(left), right(right) {
         }
 
         ~Node() {
             parent = nullptr;
             left = nullptr;
             right = nullptr;
+            index = NULL;
         }
     };
 
 private:
     Node* root;
     unsigned length;
+    unsigned new_index;
 
 public:
     BST() noexcept
-        : root(nullptr), length(0) {
+        : root(nullptr), length(0), new_index(0) {
     }
 
     ~BST() {
@@ -47,7 +49,8 @@ public:
     template <typename Comp>
     void append(const T& data, Comp compLess) {
         if (!root) {
-            root = new Node(data);
+            root = new Node(data, nullptr, new_index);
+            new_index++;
             length++;
             return;
         }
@@ -73,8 +76,9 @@ public:
                     p = p->left;
                 }
                 else {
-                    newVal = new Node(data, p);
+                    newVal = new Node(data, p, new_index);
                     p->left = newVal;
+                    new_index++;
                     length++;
                     return;
                 }
@@ -84,22 +88,25 @@ public:
                     p = p->right;
                 }
                 else {
-                    newVal = new Node(data, p);
+                    newVal = new Node(data, p, new_index);
                     p->right = newVal;
+                    new_index++;
                     length++;
                     return;
                 }
             }
         }
         if (compLess(data, p->data)) {
-            newVal = new Node(data, p);
+            newVal = new Node(data, p, new_index);
             p->left = newVal;
+            new_index++;
             length++;
             return;
         }
         else {
-            newVal = new Node(data, p);
+            newVal = new Node(data, p, new_index);
             p->right = newVal;
+            new_index++;
             length++;
             return;
         }
