@@ -102,6 +102,52 @@ public:
         }
         return p;
     }
+
+    //c)
+    template <typename Comp>
+    void findAndRemove(Node* el) {
+        auto p = el;
+        if (p == nullptr) throw std::domain_error("Proba wywolania nieistniejacego elementu.");
+        if (p->right) {
+            while (true) {
+                while (p->right) {
+                    p->data = p->right->data;
+                    p = p->right;
+                }
+                if (p->left) {
+                    p->data = p->left->data;
+                    p = p->left;
+                }
+                else {
+                    delete p;
+                    break;
+                }
+            }
+        }
+        else if (p->left) {
+            p->data = p->left->data;
+            p = p->left;
+            while (true) {
+                while (p->right) {
+                    p->data = p->right->data;
+                    p = p->right;
+                }
+                if (p->left) {
+                    p->data = p->left->data;
+                    p = p->left;
+                }
+                else {
+                    delete p;
+                    break;
+                }
+            }
+        }
+        else {
+            delete p;
+        }
+        length--;
+        return;
+    }
 };
 
 struct some_class {
