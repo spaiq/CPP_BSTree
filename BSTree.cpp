@@ -162,9 +162,9 @@ public:
     std::string pre_order(Node* node) const {
         std::ostringstream stream;
         if (node == nullptr) return stream.str();
-        stream << node->data << " ";
-        stream << pre_order(node->left);
-        stream << pre_order(node->right);
+        stream << node->data << " "
+               << pre_order(node->left)
+               << pre_order(node->right);
 
         return stream.str();
     }
@@ -173,9 +173,9 @@ public:
     std::string in_order(Node* node) const {
         std::ostringstream stream;
         if (node == nullptr) return stream.str();
-        stream << in_order(node->left);
-        stream << node->data << " ";
-        stream << in_order(node->right);
+        stream << in_order(node->left)
+               << node->data << " "
+               << in_order(node->right);
 
         return stream.str();
     }
