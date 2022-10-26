@@ -182,7 +182,7 @@ public:
     
     //f)
     void delete_tree(Node* node) {
-        if (node == nullptr) return;
+        /*if (node == nullptr) return;
 
         delete_tree(node->left);
         delete_tree(node->right);
@@ -194,6 +194,26 @@ public:
         }
         delete node;
         node = nullptr;
+        return;*/
+        auto temp = root;
+        Node* del;
+        while (true) {
+            while (temp->left)
+                temp = temp->left;
+            if (temp->right)
+                temp = temp->right;
+            else if (temp == root) break;
+            else{
+                del = temp;
+                temp = temp->parent;
+                if (del == temp->left) temp->left = nullptr;
+                else temp->right = nullptr;
+                delete del;
+                del = nullptr;
+            }
+        }
+        delete root;
+        root = nullptr;
         return;
     }
 
