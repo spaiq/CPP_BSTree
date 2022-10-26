@@ -1,4 +1,5 @@
 ﻿#include <iostream>
+#include <sstream>
 
 template<typename T>
 class BST {
