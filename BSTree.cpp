@@ -179,6 +179,17 @@ public:
 
         return str.str();
     }
+
+    //e)
+    std::string inOrder(Node* node) const {
+        std::ostringstream str;
+        if (node == nullptr) return str.str();
+        str << inOrder(node->left);
+        str << node->data << " ";
+        str << inOrder(node->right);
+
+        return str.str();
+    }
 };
 
 struct some_class {
