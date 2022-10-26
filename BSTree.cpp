@@ -246,6 +246,8 @@ int main()
 
     std::cout << tree->preOrder(tree->getRoot()) << "\n";
     std::cout << tree->inOrder(tree->getRoot()) << "\n";
+    tree->deleteTree(tree->getRoot());
+    std::cout << tree->inOrder(tree->getRoot()) << "\n";
 
     return 0;
 }
