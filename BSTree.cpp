@@ -183,7 +183,7 @@ public:
     
     //f)
     void delete_tree(Node* node) {
-        /*if (node == nullptr) return;
+        /*if (node == nullptr) return; //RECURSIVE METHOD
 
         delete_tree(node->left);
         delete_tree(node->right);
