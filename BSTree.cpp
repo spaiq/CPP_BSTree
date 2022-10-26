@@ -141,6 +141,7 @@ public:
             }
             node->data = temp->data;
             node->index = temp->index;
+            temp->parent->left = nullptr;
         }
         else if (temp->left) {
             temp = temp->left;
@@ -148,7 +149,8 @@ public:
                 temp = temp->right;
             }
             node->data = temp->data;
-            node->index = temp->index
+            node->index = temp->index;
+            temp->parent->right = nullptr;
         }
         delete temp;
         temp = nullptr;
