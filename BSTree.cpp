@@ -331,6 +331,7 @@ int main()
     std::cout << "\n" << tree->print_graph("", tree->get_root(), false) << "\n";
     tree->find_and_remove(tree->get_root());
     std::cout << "\n" << tree->print_graph("", tree->get_root(), false) << "\n";
+    std::cout << tree->to_string() << "\n";
 
     tree->delete_tree(tree->get_root());
     std::cout << tree->in_order(tree->get_root()) << "\n";
