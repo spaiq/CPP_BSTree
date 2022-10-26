@@ -1,5 +1,6 @@
 ﻿#include <iostream>
 #include <sstream>
+#include <stack>
 
 template<typename T>
 class binary_search_tree {
@@ -229,6 +230,56 @@ public:
     }
 
     //h)
+    /*std::string test(Node* node) const { //RECURSIVE METHOD
+        std::ostringstream stream;
+        if (node == nullptr) return stream.str();
+        stream << node->index << "\t";
+        if (node->parent) stream << node->parent->index << "\t";
+        else stream << "NULL" << "\t";
+        if (node->left) stream << node->left->index << "\t";
+        else stream << "NULL" << "\t";
+        if (node->right) stream << node->right->index << "\t";
+        else stream << "NULL" << "\t";
+        stream << node->data << "\n"
+               << test(node->left) << test(node->right);
+
+        return stream.str();
+    }*/
+
+    std::string to_string() {
+        if (root == NULL)
+            return "Tree is empty";
+        std::stack<Node*> nodeStack;
+        nodeStack.push(root);
+        std::ostringstream stream;
+        stream << "size: " << length
+            << "\nheight: " << tree_height(root)
+            << "\n\nindex\tparent\tleft\tright\tdata\n";
+
+        while (nodeStack.empty() == false) {
+            Node* node = nodeStack.top();
+            stream << node->index << "\t";
+
+            if (node->parent) stream << node->parent->index << "\t";
+            else stream << "NULL" << "\t";
+
+            if (node->left) stream << node->left->index << "\t";
+            else stream << "NULL" << "\t";
+
+            if (node->right) stream << node->right->index << "\t";
+            else stream << "NULL" << "\t";
+
+            stream << node->data << "\n";
+            nodeStack.pop();
+
+            if (node->right)
+                nodeStack.push(node->right);
+            if (node->left)
+                nodeStack.push(node->left);
+        }
+        return stream.str();
+    }
+
     std::string print_graph(const std::string& prefix, const Node* node, bool isLeft)
     {
         std::ostringstream stream;
