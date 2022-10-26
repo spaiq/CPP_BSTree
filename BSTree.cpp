@@ -36,7 +36,7 @@ public:
     }
 
     ~BST() {
-        //clear();
+        deleteTree();
     }
 
     Node* getRoot() {
