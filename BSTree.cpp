@@ -218,6 +218,20 @@ public:
             return std::max(leftHeight, rightHeight) + 1;
         }
     }
+
+    //h)
+    std::string printGraph(const std::string& prefix, const Node* node, bool isLeft)
+    {
+        std::ostringstream str;
+        if (node != nullptr)
+        {
+            str << prefix << "|--" << node->data << "\n";
+            str << printGraph(prefix + (isLeft ? "|   " : "    "), node->left, true);
+            str << printGraph(prefix + (isLeft ? "|   " : "    "), node->right, false);
+            return str.str();
+        }
+        return str.str();
+    }
 };
 
 struct some_class {
