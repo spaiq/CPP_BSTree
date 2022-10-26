@@ -168,6 +168,16 @@ public:
         length--;
         return;
     }
+
+    //d)
+    std::string preOrder(Node* node) const {
+        std::ostringstream str;
+        if (node == nullptr) return str.str();
+        str << node->data << " ";
+        str << preOrder(node->left);
+        str << preOrder(node->right);
+        return str.str();
+    }
 };
 
 struct some_class {
