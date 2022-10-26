@@ -160,7 +160,7 @@ struct some_class {
 
 int main()
 {
-    auto kompLess = [](const some_class& a, const some_class& b) {
+    auto compLess = [](const some_class& a, const some_class& b) {
         return a.some_int < b.some_int;
     };
 
