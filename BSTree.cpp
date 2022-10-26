@@ -287,7 +287,7 @@ public:
         std::ostringstream stream;
         if (node != nullptr)
         {
-            stream << prefix << "|--" << node->data << "\n";
+            stream << prefix << (isLeft ? "|--" : "L--") << node->data << "\n";
             stream << print_graph(prefix + (isLeft ? "|   " : "    "), node->left, true);
             stream << print_graph(prefix + (isLeft ? "|   " : "    "), node->right, false);
             return stream.str();
