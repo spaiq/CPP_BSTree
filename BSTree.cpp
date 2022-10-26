@@ -189,6 +189,17 @@ int main()
     };
 
     BST<some_class>* test = new BST<some_class>;
+    test->append(some_class{ 10 }, compLess);
+    test->append(some_class{ 2 }, compLess);
+    test->append(some_class{ 32 }, compLess);
+    test->append(some_class{ 41 }, compLess);
+    test->append(some_class{ 13 }, compLess);
+    test->append(some_class{ 7 }, compLess);
+    test->append(some_class{ 5 }, compLess);
+    test->append(some_class{ 2 }, compLess);
+    test->append(some_class{ 32 }, compLess);
+    test->append(some_class{ 13 }, compLess);
+    test->append(some_class{ 41 }, compLess);
 
     return 0;
 }
