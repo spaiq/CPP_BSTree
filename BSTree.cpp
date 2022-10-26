@@ -189,7 +189,7 @@ public:
     }
     
     //f)
-    void delete_tree(Node* node) {
+    void delete_tree() {
         /*if (node == nullptr) return; //RECURSIVE METHOD
 
         delete_tree(node->left);
@@ -203,15 +203,16 @@ public:
         delete node;
         node = nullptr;
         return;*/
+        if (ROOT == nullptr) return;
         auto temp = ROOT;
         Node* del;
-        while (true) {
+        while (temp) {
             while (temp->left)
                 temp = temp->left;
             if (temp->right)
                 temp = temp->right;
             else if (temp == ROOT) break;
-            else{
+            else {
                 del = temp;
                 temp = temp->parent;
                 if (del == temp->left) temp->left = nullptr;
@@ -222,6 +223,7 @@ public:
         }
         delete ROOT;
         ROOT = nullptr;
+        LENGTH = 0;
         return;
     }
 
