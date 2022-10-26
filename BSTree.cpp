@@ -207,6 +207,17 @@ public:
         node = nullptr;
         return;
     }
+
+    //g)
+    unsigned treeHeight(Node* node) const {
+        if (node == nullptr) return 0;
+        else {
+            int leftHeight = treeHeight(node->left);
+            int rightHeight = treeHeight(node->right);
+
+            return std::max(leftHeight, rightHeight) + 1;
+        }
+    }
 };
 
 struct some_class {
