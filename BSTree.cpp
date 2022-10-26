@@ -111,7 +111,6 @@ public:
             LENGTH++;
             return;
         }
-        std::cout << "Ooops... I shouldnt be executed.\n";
     }
 
     //b)
