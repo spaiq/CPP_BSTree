@@ -349,6 +349,8 @@ int main()
     tree->append(some_class{ 32 }, comp_less);
     tree->append(some_class{ 13 }, comp_less);
     tree->append(some_class{ 41 }, comp_less);
+    for (int i = 0; i < 20; i++)
+        tree->append(some_class{ i }, comp_less);
 
     std::cout << tree->pre_order(tree->get_root()) << "\n";
     std::cout << tree->in_order(tree->get_root()) << "\n";
