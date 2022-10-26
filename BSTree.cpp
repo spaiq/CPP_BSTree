@@ -257,7 +257,30 @@ public:
         stream << "size: " << LENGTH
             << "\nheight: " << tree_height(ROOT)
             << "\n\nindex\tparent\tleft\tright\tdata\n";
+        if (LENGTH > 10) {
+            for (unsigned i = 0; i < 10; i++) {
+                Node* node = nodeStack.top();
+                stream << node->index << "\t";
 
+                if (node->parent) stream << node->parent->index << "\t";
+                else stream << "NULL" << "\t";
+
+                if (node->left) stream << node->left->index << "\t";
+                else stream << "NULL" << "\t";
+
+                if (node->right) stream << node->right->index << "\t";
+                else stream << "NULL" << "\t";
+
+                stream << node->data << "\n";
+                nodeStack.pop();
+
+                if (node->right)
+                    nodeStack.push(node->right);
+                if (node->left)
+                    nodeStack.push(node->left);
+            }
+            return stream.str();
+        }
         while (nodeStack.empty() == false) {
             Node* node = nodeStack.top();
             stream << node->index << "\t";
