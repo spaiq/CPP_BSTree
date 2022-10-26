@@ -202,20 +202,20 @@ int main()
         return a.some_int == b.some_int;
     };
 
-    BST<some_class>* test = new BST<some_class>;
-    test->append(some_class{ 10 }, compLess);
-    test->append(some_class{ 2 }, compLess);
-    test->append(some_class{ 32 }, compLess);
-    test->append(some_class{ 41 }, compLess);
-    test->append(some_class{ 13 }, compLess);
-    test->append(some_class{ 7 }, compLess);
-    test->append(some_class{ 5 }, compLess);
-    test->append(some_class{ 2 }, compLess);
-    test->append(some_class{ 32 }, compLess);
-    test->append(some_class{ 13 }, compLess);
-    test->append(some_class{ 41 }, compLess);
+    BST<some_class>* tree = new BST<some_class>;
+    tree->append(some_class{ 10 }, compLess);
+    tree->append(some_class{ 2 }, compLess);
+    tree->append(some_class{ 32 }, compLess);
+    tree->append(some_class{ 41 }, compLess);
+    tree->append(some_class{ 13 }, compLess);
+    tree->append(some_class{ 7 }, compLess);
+    tree->append(some_class{ 5 }, compLess);
+    tree->append(some_class{ 2 }, compLess);
+    tree->append(some_class{ 32 }, compLess);
+    tree->append(some_class{ 13 }, compLess);
+    tree->append(some_class{ 41 }, compLess);
 
-    std::cout << test->preOrder(test->getRoot());
+    std::cout << tree->preOrder(tree->getRoot());
 
     return 0;
 }
