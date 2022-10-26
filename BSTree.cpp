@@ -158,6 +158,11 @@ struct some_class {
     };
 };
 
+std::ostream& operator<< (std::ostream& out, const some_class& obj) {
+    out << obj.some_int;
+    return out;
+}
+
 int main()
 {
     auto compLess = [](const some_class& a, const some_class& b) {
