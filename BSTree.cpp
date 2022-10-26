@@ -117,7 +117,7 @@ public:
     template <typename Comp>
     Node* find_element(const T& el, Comp comp_less) const {
         auto temp = root;
-        while (el != temp->data) {
+        while (!(el == temp->data)) {
             if (comp_less(el, temp->data)) {
                 if (!temp->left) return nullptr;
                 temp = temp->left;
@@ -131,47 +131,27 @@ public:
     }
 
     //c)
-    template <typename Comp>
-    void find_and_remove(Node* el) {
-        auto temp = el;
+    void find_and_remove(Node* node) {
+        auto temp = node;
         if (temp == nullptr) throw std::domain_error("Proba wywolania nieistniejacego elementu.");
         if (temp->right) {
-            while (true) {
-                while (temp->right) {
-                    temp->data = temp->right->data;
-                    temp = temp->right;
-                }
-                if (temp->left) {
-                    temp->data = temp->left->data;
-                    temp = temp->left;
-                }
-                else {
-                    delete temp;
-                    break;
-                }
+            temp = temp->right;
+            while (temp->left) {
+                temp = temp->left;
             }
+            node->data = temp->data;
+            node->index = temp->index;
         }
         else if (temp->left) {
-            temp->data = temp->left->data;
             temp = temp->left;
-            while (true) {
-                while (temp->right) {
-                    temp->data = temp->right->data;
-                    temp = temp->right;
-                }
-                if (temp->left) {
-                    temp->data = temp->left->data;
-                    temp = temp->left;
-                }
-                else {
-                    delete temp;
-                    break;
-                }
+            while (temp->right) {
+                temp = temp->right;
             }
+            node->data = temp->data;
+            node->index = temp->index
         }
-        else {
-            delete temp;
-        }
+        delete temp;
+        temp = nullptr;
         length--;
         return;
     }
@@ -276,8 +256,11 @@ int main()
     std::cout << tree->in_order(tree->get_root()) << "\n";
     std::cout << tree->tree_height(tree->get_root()) << "\n";
     std::cout << "\n" << tree->print_graph("", tree->get_root(), false) << "\n";
-    tree->delete_tree(tree->get_root());
-    std::cout << tree->in_order(tree->get_root()) << "\n";
+    tree->find_and_remove(tree->get_root());
+    std::cout << "\n" << tree->print_graph("", tree->get_root(), false) << "\n";
+
+    /*tree->delete_tree(tree->get_root());
+    std::cout << tree->in_order(tree->get_root()) << "\n";*/
 
     return 0;
 }
