@@ -176,6 +176,7 @@ public:
         str << node->data << " ";
         str << preOrder(node->left);
         str << preOrder(node->right);
+
         return str.str();
     }
 };
