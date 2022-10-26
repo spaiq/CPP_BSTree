@@ -228,6 +228,7 @@ int main()
     tree->append(some_class{ 41 }, compLess);
 
     std::cout << tree->preOrder(tree->getRoot());
+    std::cout << tree->inOrder(tree->getRoot());
 
     return 0;
 }
