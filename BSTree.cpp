@@ -357,6 +357,7 @@ int main()
     std::cout << tree->tree_height(tree->get_root()) << "\n";
     std::cout << "\n" << tree->print_graph("", tree->get_root(), false) << "\n";
     tree->find_and_remove(tree->find_element(some_class{ 41 }, comp_less));
+    tree->find_and_remove(tree->find_element(some_class{ 16 }, comp_less));
     std::cout << "\n" << tree->print_graph("", tree->get_root(), false) << "\n";
     std::cout << tree->to_string() << "\n";
 
