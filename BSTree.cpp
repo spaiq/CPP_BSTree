@@ -163,6 +163,11 @@ int main()
     auto kompLess = [](const some_class& a, const some_class& b) {
         return a.some_int < b.some_int;
     };
+
+    auto compEq = [](const some_class& a, const some_class& b) {
+        return a.some_int == b.some_int;
+    };
+
     BST<some_class>* test = new BST<some_class>;
 
     return 0;
