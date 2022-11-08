@@ -102,16 +102,15 @@ public:
             temp->left = new_value;
             NEW_INDEX++;
             LENGTH++;
-            return;
         }
         else {
             new_value = new Node(data, temp, NEW_INDEX);
             temp->right = new_value;
             NEW_INDEX++;
             LENGTH++;
-            return;
         }
-        std::cout << "Ooops... I shouldnt be executed.\n";
+        
+        return;
     }
 
     //b)
