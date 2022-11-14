@@ -356,83 +356,83 @@ int main()
         return a.some_int < b.some_int;
     };
 
-    binary_search_tree<some_class>* tree = new binary_search_tree<some_class>;
-    tree->append(some_class{ 10 }, comp_less);
-    tree->append(some_class{ 2 }, comp_less);
-    tree->append(some_class{ 32 }, comp_less);
-    tree->append(some_class{ 41 }, comp_less);
-    tree->append(some_class{ 13 }, comp_less);
-    tree->append(some_class{ 7 }, comp_less);
-    tree->append(some_class{ 5 }, comp_less);
-    tree->append(some_class{ 2 }, comp_less);
-    tree->append(some_class{ 32 }, comp_less);
-    tree->append(some_class{ 13 }, comp_less);
-    tree->append(some_class{ 41 }, comp_less);
-    for (int i = 0; i < 20; i++)
-        tree->append(some_class{ i }, comp_less);
+    //binary_search_tree<some_class>* tree = new binary_search_tree<some_class>;
+    //tree->append(some_class{ 10 }, comp_less);
+    //tree->append(some_class{ 2 }, comp_less);
+    //tree->append(some_class{ 32 }, comp_less);
+    //tree->append(some_class{ 41 }, comp_less);
+    //tree->append(some_class{ 13 }, comp_less);
+    //tree->append(some_class{ 7 }, comp_less);
+    //tree->append(some_class{ 5 }, comp_less);
+    //tree->append(some_class{ 2 }, comp_less);
+    //tree->append(some_class{ 32 }, comp_less);
+    //tree->append(some_class{ 13 }, comp_less);
+    //tree->append(some_class{ 41 }, comp_less);
+    //for (int i = 0; i < 20; i++)
+    //    tree->append(some_class{ i }, comp_less);
 
-    std::cout << tree->pre_order(tree->get_root()) << "\n";
-    std::cout << tree->in_order(tree->get_root()) << "\n";
-    std::cout << tree->tree_height(tree->get_root()) << "\n";
-    std::cout << "\n" << tree->print_graph("", tree->get_root(), false) << "\n";
-    tree->find_and_remove(tree->find_element(some_class{ 41 }, comp_less));
-    tree->find_and_remove(tree->find_element(some_class{ 16 }, comp_less));
-    std::cout << "\n" << tree->print_graph("", tree->get_root(), false) << "\n";
-    tree->find_and_remove(tree->find_element(some_class{ 10 }, comp_less));
-    std::cout << "\n" << tree->print_graph("", tree->get_root(), false) << "\n";
-    std::cout << tree->to_string() << "\n";
+    //std::cout << tree->pre_order(tree->get_root()) << "\n";
+    //std::cout << tree->in_order(tree->get_root()) << "\n";
+    //std::cout << tree->tree_height(tree->get_root()) << "\n";
+    //std::cout << "\n" << tree->print_graph("", tree->get_root(), false) << "\n";
+    //tree->find_and_remove(tree->find_element(some_class{ 41 }, comp_less));
+    //tree->find_and_remove(tree->find_element(some_class{ 16 }, comp_less));
+    //std::cout << "\n" << tree->print_graph("", tree->get_root(), false) << "\n";
+    //tree->find_and_remove(tree->find_element(some_class{ 10 }, comp_less));
+    //std::cout << "\n" << tree->print_graph("", tree->get_root(), false) << "\n";
+    //std::cout << tree->to_string() << "\n";
 
-    tree->delete_tree();
-    std::cout << tree->in_order(tree->get_root()) << "\n";
-    delete tree;
+    //tree->delete_tree();
+    //std::cout << tree->in_order(tree->get_root()) << "\n";
+    //delete tree;
 
-    //const int MAX_ORDER = 7; // maksymalny rzad wielkosci dodawanych danych
-    //binary_search_tree<some_class>* bst = new binary_search_tree<some_class>; // stworzenie drzewa
-    //srand(time(NULL));
-    //int random;
-    //for (int o = 1; o <= MAX_ORDER; o++)
-    //{
-    //    const int n = pow(10, o); // rozmiar danych
-    //    // dodawanie do drzewa
-    //    clock_t t1 = clock();
-    //    for (int i = 0; i < n; i++)
-    //    {
-    //        random = rand() % 10001;
-    //        some_class so = some_class{ random }; // losowe dane
-    //        bst->append(so, comp_less); // dodanie ( drugi argument to wskaznik na komparator )
-    //    }
-    //    clock_t t2 = clock();
-    //    double mstimediff = 1000 * (t2 - t1) / (double)CLOCKS_PER_SEC;
-    //    std::cout << bst->to_string() 
-    //        << "\nPomiar 1 (dodawanie), rzedu " << o 
-    //        << "\nCzas calkowity: " << mstimediff
-    //        << "ms\nCzas zamortyzowany: " << mstimediff / n << "ms\n\n";; // wypis na ekran aktualnej postaci drzewa ( skrotowej ) wraz z pomiarami czasowymi i w / w wielkosciami
-    //    // wyszukiwanie
-    //    const int m = pow(10, 4); // liczba prob wyszukiwania
-    //    int hits = 0; // liczba trafien
-    //    t1 = clock();
-    //    for (int i = 0; i < m; i++)
-    //    {
-    //        random = rand() % 10001;
-    //        some_class* so = new some_class{ random }; // losowe dane jako wzorzec do wyszukiwania ( obiekt chwilowy )
-    //        if (bst->find_element(*so, comp_less) != NULL)
-    //            hits++;
-    //        delete so;
-    //    }
-    //    t2 = clock();
-    //    mstimediff = 1000 * (t2 - t1) / (double)CLOCKS_PER_SEC;
-    //    double log_result = log2(n);
-    //    unsigned height = bst->tree_height(bst->get_root());
-    //    std::cout << bst->to_string()
-    //        << "\nPomiar 2 (wyszukiwanie), rzedu " << o
-    //        << "\nCzas calkowity: " << mstimediff
-    //        << "ms\nCzas zamortyzowany: " << mstimediff / n << "ms\n\n"
-    //        << "\nStosunek wysokosci drzewa do rozmiaru danych: " << height / n
-    //        << "\nLogarytm z rozmiaru danych: " << log_result
-    //        << "\nStosunek wysokosci drzewa do logarytmu z rozmiaru danych: " << height/log_result << "\n"; // wypis na ekran pomiarow czasowych i liczby trafien
-    //        bst->delete_tree(); // czyszczenie drzewa wraz z uwalnianiem pamieci danych
-    //}
-    //delete bst;
+    const int MAX_ORDER = 7; // maksymalny rzad wielkosci dodawanych danych
+    binary_search_tree<some_class>* bst = new binary_search_tree<some_class>; // stworzenie drzewa
+    srand(time(NULL));
+    int random;
+    for (int o = 1; o <= MAX_ORDER; o++)
+    {
+        const int n = pow(10, o); // rozmiar danych
+        // dodawanie do drzewa
+        clock_t t1 = clock();
+        for (int i = 0; i < n; i++)
+        {
+            random = rand() % 10001;
+            some_class so = some_class{ random }; // losowe dane
+            bst->append(so, comp_less); // dodanie ( drugi argument to wskaznik na komparator )
+        }
+        clock_t t2 = clock();
+        double mstimediff = 1000 * (t2 - t1) / (double)CLOCKS_PER_SEC;
+        std::cout << bst->to_string() 
+            << "\nPomiar 1 (dodawanie), rzedu " << o 
+            << "\nCzas calkowity: " << mstimediff
+            << "ms\nCzas zamortyzowany: " << mstimediff / n << "ms\n\n";; // wypis na ekran aktualnej postaci drzewa ( skrotowej ) wraz z pomiarami czasowymi i w / w wielkosciami
+        // wyszukiwanie
+        const int m = pow(10, 4); // liczba prob wyszukiwania
+        int hits = 0; // liczba trafien
+        t1 = clock();
+        for (int i = 0; i < m; i++)
+        {
+            random = rand() % 10001;
+            some_class* so = new some_class{ random }; // losowe dane jako wzorzec do wyszukiwania ( obiekt chwilowy )
+            if (bst->find_element(*so, comp_less) != NULL)
+                hits++;
+            delete so;
+        }
+        t2 = clock();
+        mstimediff = 1000 * (t2 - t1) / (double)CLOCKS_PER_SEC;
+        double log_result = log2(n);
+        unsigned height = bst->tree_height(bst->get_root());
+        std::cout << bst->to_string()
+            << "\nPomiar 2 (wyszukiwanie), rzedu " << o
+            << "\nCzas calkowity: " << mstimediff
+            << "ms\nCzas zamortyzowany: " << mstimediff / n << "ms\n\n"
+            << "\nStosunek wysokosci drzewa do rozmiaru danych: " << height / n
+            << "\nLogarytm z rozmiaru danych: " << log_result
+            << "\nStosunek wysokosci drzewa do logarytmu z rozmiaru danych: " << height/log_result << "\n"; // wypis na ekran pomiarow czasowych i liczby trafien
+            bst->delete_tree(); // czyszczenie drzewa wraz z uwalnianiem pamieci danych
+    }
+    delete bst;
 
 
     return 0;
