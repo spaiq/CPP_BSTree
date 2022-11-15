@@ -415,10 +415,8 @@ int main()
         {
             random = rand() % 10001;
             some_class* so = new some_class{ random }; // losowe dane jako wzorzec do wyszukiwania ( obiekt chwilowy )
-            if (bst->find_element(*so, comp_less) != NULL) {
+            if (bst->find_element(*so, comp_less) != NULL)
                 hits++;
-                std::cout << bst->find_element(*so, comp_less)->data << std::endl;
-            }
             delete so;
         }
         t2 = clock();
