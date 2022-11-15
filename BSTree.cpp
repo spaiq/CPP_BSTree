@@ -64,12 +64,12 @@ public:
         while (temp->left || temp->right) {
             if(temp->left)
                 if (data == temp->left->data) {
-                    temp->left->data = data;
+                    //temp->left->data = data;
                     return;
                 }
             if(temp->right)
                 if (data == temp->right->data) {
-                    temp->right->data = data;
+                    //temp->right->data = data;
                     return;
                 }
             if (comp_less(data, temp->data)) {
@@ -160,7 +160,7 @@ public:
             node->data = temp->data;
             node->index = temp->index;
             if (temp->left) {
-                if (temp == temp->parent->right) {
+                if (temp == temp->parent->left) {
                     temp->left->parent = temp->parent;
                     temp->parent->left = temp->left;
                 }
@@ -170,8 +170,16 @@ public:
                 }
             }
         }
-        else if (temp == temp->parent->right) temp->parent->right = nullptr;
-        else if (temp == temp->parent->left) temp->parent->left = nullptr;
+        if (temp != ROOT) {
+            if (temp == temp->parent->right) temp->parent->right = nullptr;
+            else if (temp == temp->parent->left) temp->parent->left = nullptr;
+        }
+        else {
+            delete ROOT;
+            ROOT = nullptr;
+            LENGTH = 0;
+            return;
+        }
         delete temp;
         temp = nullptr;
         LENGTH--;
@@ -236,6 +244,7 @@ public:
         delete ROOT;
         ROOT = nullptr;
         LENGTH = 0;
+        NEW_INDEX = 0;
         return;
     }
 
@@ -349,13 +358,38 @@ std::ostream& operator<< (std::ostream& out, const some_class& obj) {
     out << obj.some_int;
     return out;
 }
-
+#include <vector>
+#include <numeric>
+#include <algorithm>
 int main()
 {
     auto comp_less = [](const some_class& a, const some_class& b) {
         return a.some_int < b.some_int;
     };
-
+    {
+        std::vector<int> v(8);
+        std::iota(v.begin(), v.end(), 0);
+        do
+        {
+            //system("cls");
+            binary_search_tree<int> t;
+            for (int i : v)
+            {
+                //std::cout << i << " ";
+                t.append(i, std::less<int>{});
+            }
+            //std::cout << std::endl;
+            //t.append(1, std::less<int>{});
+            //std::cout << "\n" << t.print_graph("", t.get_root(), false) << "\n";
+            for (int i : v)
+            {
+                t.find_and_remove(t.find_element(i, std::less<int>{}));
+                //std::cout << "Po usunięciu " << i << "\n" << t.print_graph("", t.get_root(), false) << "\n";
+            }
+            //t.find_and_remove(t.find_element(0, std::less<int>{}));
+        } while (std::next_permutation(v.begin(), v.end()));
+        return 0;
+    }
     //binary_search_tree<some_class>* tree = new binary_search_tree<some_class>;
     //tree->append(some_class{ 10 }, comp_less);
     //tree->append(some_class{ 2 }, comp_less);
