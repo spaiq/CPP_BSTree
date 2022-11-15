@@ -415,8 +415,10 @@ int main()
         {
             random = rand() % 10001;
             some_class* so = new some_class{ random }; // losowe dane jako wzorzec do wyszukiwania ( obiekt chwilowy )
-            if (bst->find_element(*so, comp_less) != NULL)
+            if (bst->find_element(*so, comp_less) != NULL) {
                 hits++;
+                std::cout << bst->find_element(*so, comp_less)->data << std::endl;
+            }
             delete so;
         }
         t2 = clock();
@@ -426,7 +428,8 @@ int main()
         std::cout << bst->to_string()
             << "\nPomiar 2 (wyszukiwanie), rzedu " << o
             << "\nCzas calkowity: " << mstimediff
-            << "ms\nCzas zamortyzowany: " << mstimediff / n << "ms\n\n"
+            << "ms\nCzas zamortyzowany: " << mstimediff / n << "ms"
+            << "\nTrafienia: " << hits << "\n\n"
             << "\nStosunek wysokosci drzewa do rozmiaru danych: " << height / n
             << "\nLogarytm z rozmiaru danych: " << log_result
             << "\nStosunek wysokosci drzewa do logarytmu z rozmiaru danych: " << height/log_result << "\n"; // wypis na ekran pomiarow czasowych i liczby trafien
