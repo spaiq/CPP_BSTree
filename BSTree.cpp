@@ -1,4 +1,10 @@
-﻿#include <iostream>
+﻿/*********************
+* Binary Search Tree
+* @author Bartłomiej Juszczyk
+*
+**********************/
+
+#include <iostream>
 #include <sstream>
 #include <stack>
 
@@ -46,7 +52,6 @@ public:
         return ROOT;
     }
 
-    //a)
     template <typename Comp>
     void append(const T& data, Comp comp_less) {
         if (!ROOT) {
@@ -113,7 +118,6 @@ public:
         return;
     }
 
-    //b)
     template <typename Comp>
     Node* find_element(const T& el, Comp comp_less) const {
         auto temp = ROOT;
@@ -130,7 +134,6 @@ public:
         return temp;
     }
 
-    //c)
     void find_and_remove(Node* node) {
         auto temp = node;
         if (temp == nullptr) throw std::domain_error("Proba wywolania nieistniejacego elementu.");
@@ -186,7 +189,6 @@ public:
         return;
     }
 
-    //d)
     std::string pre_order(Node* node) const {
         std::ostringstream stream;
         if (node == nullptr) return stream.str();
@@ -197,7 +199,6 @@ public:
         return stream.str();
     }
 
-    //e)
     std::string in_order(Node* node) const {
         std::ostringstream stream;
         if (node == nullptr) return stream.str();
@@ -208,7 +209,6 @@ public:
         return stream.str();
     }
     
-    //f)
     void delete_tree() {
         /*if (node == nullptr) return; //RECURSIVE METHOD
 
@@ -248,7 +248,6 @@ public:
         return;
     }
 
-    //g)
     unsigned tree_height(Node* node) const {
         if (node == nullptr) return 0;
         else {
@@ -259,7 +258,6 @@ public:
         }
     }
 
-    //h)
     /*std::string test(Node* node) const { //RECURSIVE METHOD
         std::ostringstream stream;
         if (node == nullptr) return stream.str();
@@ -361,6 +359,8 @@ std::ostream& operator<< (std::ostream& out, const some_class& obj) {
 #include <vector>
 #include <numeric>
 #include <algorithm>
+
+// Example usage
 int main()
 {
     auto comp_less = [](const some_class& a, const some_class& b) {
